@@ -1,0 +1,1 @@
+The portfolio is a React and Vite application deployed to GitHub Pages. A GitHub Actions workflow installs dependencies, runs the Vite production build, uploads the dist artifact, and deploys it. The Vite base path is configured as /port_folio/ so JavaScript and CSS assets resolve correctly.

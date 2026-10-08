@@ -1,0 +1,1 @@
+Production Django services keep secret keys, debug mode, allowed hosts, and external credentials in environment variables. Automated tests and Django system checks run in GitHub Actions. Virtual environments, SQLite databases, caches, and uploaded media are excluded from version control.
