@@ -67,7 +67,7 @@ Set `LLM_BASE_URL`, `LLM_API_KEY`, and `LLM_MODEL` using `.env.example` as a ref
 
 ```bash
 ruff check .
-pytest -q
+python -m pytest -q
 python -m scripts.evaluate
 ```
 
