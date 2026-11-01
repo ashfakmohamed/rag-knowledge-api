@@ -49,3 +49,27 @@ def test_query_validation_rejects_invalid_top_k():
         response = client.post("/query", json={"question": "valid question", "top_k": 0})
 
     assert response.status_code == 422
+
+def test_query_without_overlapping_evidence_is_not_grounded():
+    with TestClient(app) as client:
+        response = client.post(
+            "/query", json={"question": "xylophone quasar nebula", "top_k": 2}
+        )
+    assert response.status_code == 200
+    assert response.json()["grounded"] is False
+    assert response.json()["citations"] == []
+
+
+def test_query_rejects_excessive_question_size():
+    with TestClient(app) as client:
+        response = client.post("/query", json={"question": "a" * 2001})
+    assert response.status_code == 422
+
+
+def test_ingest_rejects_oversized_document():
+    with TestClient(app) as client:
+        response = client.post(
+            "/documents",
+            json={"title": "oversized", "content": "a" * 50001, "source": "test"},
+        )
+    assert response.status_code == 422

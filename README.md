@@ -88,3 +88,7 @@ The included evaluation asserts `recall@1` for known questions. Production exten
 - CI requires no external model or secret.
 - The container runs as an unprivileged user.
 - Retrieved evidence is returned with every grounded answer.
+
+## Demo safety limitations
+
+This is a reference service, **not** an authenticated multi-user knowledge platform. `POST /documents` and `POST /query` have no access-control layer, and documents reside only in the process-local TF-IDF index. Do not expose this configuration to public or untrusted users or ingest private data. Before production use, add authentication, tenant-specific isolation, persistence, rate limits, and audit logging. A `grounded` response currently means at least one retrieved citation has positive lexical similarity; it does not independently verify the answer's factual correctness. Provider-generated content should be treated as untrusted output.
